@@ -11,6 +11,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.10/babel.min.js"></script>
   <!-- FileSaver for saving files -->
   <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <!-- html-docx-js for Word export -->
+  <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
   <style>
     *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb;}
     html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
@@ -552,8 +554,8 @@
               </html>
             `;
           }
-          const blob = new Blob([htmlContent], { type: 'application/msword' });
-          saveAs(blob, `${rubricTitle}.docx`);
+          const converted = htmlDocx.asBlob(htmlContent);
+          saveAs(converted, `${rubricTitle}.docx`);
           setErrorMessages([]);
         } catch (error) {
           console.error("Lỗi khi xuất file Word:", error);
@@ -603,7 +605,7 @@
                 <option value="C8">Thực tập doanh nghiệp (C8)</option>
                 <option value="C9">Báo cáo thực tập (C9)</option>
                 <option value="C10">Khóa luận (Hội đồng) (C10)</option>
-                <option value="C11">Khantil luận (C11)</option>
+                <option value="C11">Khóa luận (C11)</option>
                 <option value="C12">Chuẩn đầu ra học phần (C12)</option>
               </select>
             </div>
