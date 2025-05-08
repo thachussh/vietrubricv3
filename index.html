@@ -470,12 +470,13 @@
                   <style>
                     body { font-family: Arial, sans-serif; }
                     h1 { font-size: 24px; font-weight: bold; }
-                    p { font-size: 16px; }
+                    p { font-size: 16px; margin: 8px 0; }
                     table { width: 100%; border-collapse: collapse; }
-                    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+                    th, td { border: 1px solid black; padding: 8px; text-align: left; vertical-align: top; }
                     th { background-color: #f2f2f2; }
                     .total-row { font-weight: bold; }
-                    .score-text { font-style: italic; font-size: 14px; display: block; margin-top: 8px; }
+                    .description { font-size: 14px; margin: 0; }
+                    .score-text { font-style: italic; font-size: 14px; margin: 8px 0 0 0; }
                   </style>
                 </head>
                 <body>
@@ -497,7 +498,10 @@
                           <td>${criterion.name}</td>
                           <td>${criterion.weight}</td>
                           ${criterion.descriptions.map((desc, levelIdx) => `
-                            <td>${desc || "-"}<br><span class="score-text">${criterion.scores[levelIdx].toFixed(2)}</span></td>
+                            <td>
+                              <p class="description">${desc || "-"}</p>
+                              <p class="score-text">${criterion.scores[levelIdx].toFixed(2)}</p>
+                            </td>
                           `).join('')}
                           <td>${criterionScores[idx] || ""}</td>
                         </tr>
@@ -677,7 +681,7 @@
               <div className="mt-4">
                 <p className="text-sm font-medium">Gợi ý từ Bloom’s Taxonomy:</p>
                 <div className="flex flex-wrap gap-2 mt-1">
-                  {Object.keys(bloomsTaxonomy).map((key) => (
+                  {Object.keys(bloomsValley).map((key) => (
                     <button
                       key={key}
                       onClick={() => addBloomsCriterion(key)}
